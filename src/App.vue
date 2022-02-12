@@ -9,8 +9,8 @@
       </router-link>
       |
       <router-link
-        to="/About">
-        About
+        to="/TimePicker">
+        TimePicker
       </router-link>
     </div>
     <router-view />

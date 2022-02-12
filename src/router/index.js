@@ -9,9 +9,9 @@ const routes = [
     component: resolve => require(['@/views/Tab.vue'], resolve),
   },
   {
-    path: '/About',
-    name: 'About',
-    component: resolve => require(['@/views/About.vue'], resolve),
+    path: '/TimePicker',
+    name: 'TimePicker',
+    component: resolve => require(['@/views/TimePicker.vue'], resolve),
   },
 ]
 
