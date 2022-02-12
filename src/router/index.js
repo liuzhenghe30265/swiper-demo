@@ -5,8 +5,8 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: resolve => require(['@/views/Home.vue'], resolve),
+    name: 'Tab',
+    component: resolve => require(['@/views/Tab.vue'], resolve),
   },
   {
     path: '/About',
