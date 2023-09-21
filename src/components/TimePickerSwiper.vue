@@ -1,47 +1,48 @@
 <template>
-  <div
-    class="time_picker_swiper">
+  <div class="time_picker_swiper">
     <div
       class="time_value"
-      @click="handleVisible">
+      @click="handleVisible"
+    >
       {{computedTime}}
     </div>
     <div
       class="time_picker_container"
-      v-show="visible">
-      <div
-        class="time_container">
-        <h5swiper
+      v-show="visible"
+    >
+      <div class="time_container">
+        <swiper
           ref="hSwiper"
           :options="hSwiperOptions"
-          class="swiper_hours">
+          class="swiper_hours"
+        >
           <swiper-slide
             v-for="(item, index) of hList"
             :key="index"
-            class="pic_li">
+            class="pic_li"
+          >
             {{ item }}
           </swiper-slide>
-        </h5swiper>
-        <h5swiper
+        </swiper>
+        <swiper
           ref="mSwiper"
           :options="mSwiperOptions"
-          class="swiper_hours">
+          class="swiper_hours"
+        >
           <swiper-slide
             v-for="(item, index) of mList"
             :key="index + 'm'"
-            class="pic_li">
+            class="pic_li"
+          >
             {{ item }}
           </swiper-slide>
-        </h5swiper>
+        </swiper>
       </div>
-      <div
-        class="btn_container">
-        <span
-          @click.stop="handleCancel">
+      <div class="btn_container">
+        <span @click.stop="handleCancel">
           取消
         </span>
-        <span
-          @click.stop="handleOK">
+        <span @click.stop="handleOK">
           确定
         </span>
       </div>
@@ -50,20 +51,15 @@
 </template>
 
 <script>
-import { swiper as h5swiper, swiperSlide } from 'vue-awesome-swiper'
-import 'swiper/dist/css/swiper.css'
 export default {
   name: 'TimePickerSwiper',
 
-  components: {
-    h5swiper,
-    swiperSlide,
-  },
+  components: {},
 
   props: {
     disabled: {
       type: Boolean,
-      default () {
+      default() {
         return false
       }
     }
@@ -71,10 +67,10 @@ export default {
 
   disabled: {
     immediate: true,
-    handler: function () { }
+    handler: function () {}
   },
 
-  data () {
+  data() {
     const _this = this
     return {
       visible: false,
@@ -143,19 +139,22 @@ export default {
   },
 
   computed: {
-    computedTime () {
-      const value = this.selectH !== '' && this.selectM !== '' ? this.selectH + ':' + this.selectM + ':' + '00' : '添加时间'
+    computedTime() {
+      const value =
+        this.selectH !== '' && this.selectM !== ''
+          ? this.selectH + ':' + this.selectM + ':' + '00'
+          : '添加时间'
       return value
     },
-    hSwiper () {
+    hSwiper() {
       return this.$refs.hSwiper.swiper
     },
-    mSwiper () {
+    mSwiper() {
       return this.$refs.mSwiper.$el.swiper
     }
   },
 
-  mounted () {
+  mounted() {
     clearInterval(this.timer)
     // this.setTimerPickerSelectableRange()
     this.resetTimeValue()
@@ -166,7 +165,7 @@ export default {
   },
 
   methods: {
-    resetTimeValue () {
+    resetTimeValue() {
       this.selectM = ''
       this.selectH = ''
       this.getHList()
@@ -177,15 +176,15 @@ export default {
       this.hSwiper.slideTo(0, 500)
       this.mSwiper.slideTo(0, 500)
     },
-    handleOK () {
+    handleOK() {
       this.visible = false
       this.$emit('pickerTime', this.selectH + ':' + this.selectM + ':' + '00')
     },
-    handleCancel () {
+    handleCancel() {
       this.visible = false
       this.resetTimeValue()
     },
-    handleVisible () {
+    handleVisible() {
       this.visible = !this.visible
       // if (this.visible) {
       //   // 如果没有选择过日期，设置为当前时间，如果已选择过（点击过确认按钮），则保留已确认的日期
@@ -195,23 +194,24 @@ export default {
       //   this.resetTimeValue()
       // }
     },
-    getHList () {
+    getHList() {
       // const _h = this.$utils.formatDate(new Date(), 'hh')
       this.hList = this.getSelectableRange(1, 24)
     },
-    getMList () {
+    getMList() {
       // const _m = this.$utils.formatDate(new Date(), 'mm')
       this.mList = this.getSelectableRange(0, 60)
     },
-    getSelectableRange (start, end) {
+    getSelectableRange(start, end) {
       const arr = []
       for (let i = 0; i < end; i++) {
-        arr[i] = String(i).length > 1 ? String(i) : (Array(2).join(0) + i).slice(-2)
+        arr[i] =
+          String(i).length > 1 ? String(i) : (Array(2).join(0) + i).slice(-2)
       }
       return arr.splice(start, arr.length)
     },
     // 设置日期可选区间
-    setTimerPickerSelectableRange () {
+    setTimerPickerSelectableRange() {
       if (this.timer) {
         clearInterval(this.timer)
       }

@@ -1,61 +1,61 @@
 <template>
-  <div
-    class="tab">
-    <h5swiper
+  <div class="tab">
+    <swiper
       ref="swiperTitle"
       class="swiper-title"
       :options="swiperOptionTitle"
       :auto-update="true"
       :auto-destroy="true"
       :delete-instance-on-destroy="true"
-      :cleanup-styles-on-destroy="true">
+      :cleanup-styles-on-destroy="true"
+    >
       <swiper-slide
         v-for="(item, index) of tabListData"
         ref="swiperSlideItem"
         :key="'name' + index"
         :iname="item.name"
-        class="swiper-slide-title">
+        class="swiper-slide-title"
+      >
         <div
           class="tab-name"
           :class="{ active: index === swiperActiveIndex }"
-          @click="handleSlidClickFun(index)">
+          @click="handleSlidClickFun(index)"
+        >
           {{ item.name }}
         </div>
       </swiper-slide>
       <div
         class="swiper-scrollbar"
-        slot="scrollbar">
+        slot="scrollbar"
+      >
       </div>
-    </h5swiper>
-    <h5swiper
+    </swiper>
+    <swiper
       ref="swiperContent"
       class="swiper-content"
       :options="swiperOptionContent"
       :auto-update="true"
       :auto-destroy="true"
       :delete-instance-on-destroy="true"
-      :cleanup-styles-on-destroy="true">
+      :cleanup-styles-on-destroy="true"
+    >
       <swiper-slide
         v-for="(item, index) of tabListData"
         :key="'content' + index"
-        class="swiper-slide-content">
+        class="swiper-slide-content"
+      >
         {{ item.name }}
       </swiper-slide>
-    </h5swiper>
+    </swiper>
   </div>
 </template>
 
 <script>
 //  vue-awesome-swiper 官网 https://github.surmon.me/vue-awesome-swiper/
-import { swiper as h5swiper, swiperSlide } from 'vue-awesome-swiper'
-import 'swiper/dist/css/swiper.css'
 export default {
-  name: 'tab',
-  components: {
-    h5swiper,
-    swiperSlide,
-  },
-  data () {
+  name: 'Tab',
+  components: {},
+  data() {
     const _this = this
     return {
       swiperActiveIndex: 0,
@@ -66,8 +66,8 @@ export default {
           slideChangeTransitionStart: function () {
             _this.swiperActiveIndex = this.activeIndex
             _this.swiperTitle.slideTo(this.activeIndex, 500, false)
-          },
-        },
+          }
+        }
       },
       swiperOptionTitle: {
         slidesPerView: 'auto',
@@ -77,52 +77,52 @@ export default {
           hide: false,
           draggable: false,
           snapOnRelease: true,
-          dragSize: 20,
+          dragSize: 20
         }
       },
       tabListData: [
         {
-          name: '直播',
+          name: '直播'
         },
         {
-          name: '推荐',
+          name: '推荐'
         },
         {
-          name: '追番',
+          name: '追番'
         },
         {
-          name: '热门',
+          name: '热门'
         },
         {
-          name: '影视',
+          name: '影视'
         },
         {
-          name: '奥运',
+          name: '奥运'
         },
         {
-          name: '建党百年',
-        },
-      ],
+          name: '建党百年'
+        }
+      ]
     }
   },
   computed: {
-    swiperContent () {
+    swiperContent() {
       return this.$refs.swiperContent.$el.swiper
     },
-    swiperTitle () {
+    swiperTitle() {
       return this.$refs.swiperTitle.$el.swiper
-    },
+    }
   },
-  mounted () { },
+  mounted() {},
   methods: {
-    handleSlideToFun (index) {
+    handleSlideToFun(index) {
       this.swiperActiveIndex = index
       this.swiperContent.slideTo(index, 500, false)
       this.swiperTitle.slideTo(index, 500, false)
     },
-    handleSlidClickFun (index) {
+    handleSlidClickFun(index) {
       this.handleSlideToFun(index)
-    },
+    }
   }
 }
 </script>
