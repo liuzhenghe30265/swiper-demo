@@ -1,4 +1,4 @@
-# arcgis4-vue
+# swiper-demo
 
 ## Project setup
 ```
