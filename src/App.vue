@@ -1,16 +1,16 @@
 <template>
-  <div
-    id="app">
-    <div
-      id="nav">
-      <router-link
-        to="/">
+  <div id="app">
+    <div id="nav">
+      <router-link to="/">
         Tab
       </router-link>
       |
-      <router-link
-        to="/TimePicker">
+      <router-link to="/TimePicker">
         TimePicker
+      </router-link>
+      |
+      <router-link to="/Vrtual">
+        Vrtual
       </router-link>
     </div>
     <router-view />
@@ -21,12 +21,12 @@
 export default {
   name: 'App',
   components: {},
-  data () {
+  data() {
     return {
       routes: []
     }
   },
-  mounted () {
+  mounted() {
     this.routes = this.$router.options.routes
   }
 }

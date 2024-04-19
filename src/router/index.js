@@ -13,6 +13,11 @@ const routes = [
     name: 'TimePicker',
     component: resolve => require(['@/views/TimePicker.vue'], resolve),
   },
+  {
+    path: '/Vrtual',
+    name: 'Vrtual',
+    component: resolve => require(['@/views/Vrtual.vue'], resolve),
+  },
 ]
 
 const router = new VueRouter({
